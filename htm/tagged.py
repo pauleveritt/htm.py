@@ -71,7 +71,7 @@ def tag(func=None, *, cache_maxsize=128):
 
     def _tag(func):
         @functools.wraps(func)
-        def __tag(string):
+        def __tag(string, **kwargs):
             strings, exprs = cached_split(string, compile_exprs=True)
 
             stack = inspect.stack()
