@@ -1,0 +1,8 @@
+-e .
+htm
+wired
+pyramid
+toolz
+sidekick
+markupsafe
+hyperpython

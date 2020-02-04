@@ -1,6 +1,6 @@
 import re
 import functools
-from tagged import tag, ParseError
+from htm.tagged import tag, ParseError
 
 
 RE_COLLAPSE = re.compile(r"^[^\S\n]*\n\s*|[^\S\n]*\n\s*$")
