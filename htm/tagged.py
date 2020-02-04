@@ -82,7 +82,7 @@ def tag(func=None, *, cache_maxsize=128):
             values = []
             for expr in exprs:
                 values.append(eval(expr, f_globals, f_locals))
-            return func(strings, tuple(values))
+            return func(strings, tuple(values), **kwargs)
 
         return __tag
 

@@ -213,7 +213,7 @@ def htm_parse(strings):
     return ops
 
 
-def htm_eval(h, ops, values, index=0):
+def htm_eval(h, ops, values, index=0, **kwargs):
     root = []
     stack = [("", {}, root)]
 
@@ -223,7 +223,7 @@ def htm_eval(h, ops, values, index=0):
             stack.append((values[tag] if value else tag, {}, []))
         elif op[0] == "CLOSE":
             tag, props, children = stack.pop()
-            stack[-1][2].append(h(tag, props, children))
+            stack[-1][2].append(h(tag, props, children, **kwargs))
         elif op[0] == "SPREAD":
             _, value, item = op
             tag, props, children = stack[-1]
@@ -254,9 +254,9 @@ def htm(func=None, *, cache_maxsize=128):
     def _htm(h):
         @tag
         @functools.wraps(h)
-        def __htm(strings, values):
+        def __htm(strings, values, **kwargs):
             ops = cached_parse(strings)
-            return htm_eval(h, ops, values)
+            return htm_eval(h, ops, values, **kwargs)
         return __htm
 
     if func is not None:

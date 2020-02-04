@@ -11,9 +11,9 @@ from htm import htm
 
 
 @htm
-def html(tag, props, children):
+def html(tag, props, children, **kwargs):
     if callable(tag):
-        return tag_factory(tag, children=children, **props)
+        return tag_factory(tag, children=children, **props, **kwargs)
     return h(tag, props, children)
 
 
