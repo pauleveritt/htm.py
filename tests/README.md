@@ -15,6 +15,15 @@ We also make a change in ``htm`` to forward along the args.
 Components should be able to ask only for the arguments they need.
 
 In this example we implement some (simple, naive) argument sniffing.
+The inspection uses the examples from the ``htm`` docs, with a ``tag_factory`` that builds up a ``**kwargs`` from the passed-in values.
+
+## Stateful ``html``
+
+What if ``html`` could be a custom class, with some state, which could be used in the component?
+
+
+## Later
+
 If your component wants an argument, the factory gets it from the following, in order of precedence:
  
 - Props passed in when the component was called

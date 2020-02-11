@@ -1,10 +1,10 @@
+import functools
+import inspect
 import io
 import re
-import inspect
-import functools
 from bisect import bisect
-from tokenize import tokenize, untokenize
 from token import tok_name
+from tokenize import tokenize, untokenize
 
 RE_TEMPLATE = re.compile(rb"(?:{{|}}|[^{}])*(?={|$)")
 

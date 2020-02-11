@@ -1,13 +1,9 @@
 """
 
-Alternative decorator that uses hyperpython and a pluggable,
-stateful factory.
+Pass kwargs from calling ``html()`` all the way through to the component.
 
 """
-from inspect import Parameter
-from inspect import Signature
-from inspect import signature
-from typing import Dict
+from inspect import Parameter, signature
 
 from hyperpython import h
 
