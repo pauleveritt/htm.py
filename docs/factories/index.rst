@@ -41,7 +41,7 @@ required.
   from f02 import result02
 
 >>> result02
-'<header>Result: Hello Component</header>'
+('header', {}, ['Result', ': Hello ', 'Component'])
 
 
 Stateful Factory

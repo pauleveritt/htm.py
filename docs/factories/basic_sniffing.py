@@ -5,7 +5,6 @@ Pass kwargs from calling ``html()`` all the way through to the component.
 """
 from inspect import Parameter, signature
 
-from hyperpython import h
 
 from .custom_htm import htm
 
@@ -14,7 +13,7 @@ from .custom_htm import htm
 def html(tag, props, children, **kwargs):
     if callable(tag):
         return tag_factory(tag, children=children, **props, **kwargs)
-    return h(tag, props, children)
+    return tag, props, children
 
 
 def tag_factory(tag_callable, **kwargs):

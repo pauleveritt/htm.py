@@ -9,4 +9,4 @@ def Heading(config, header='Default'):
     return html('<header>{label}: Hello {header}</header>')
 
 
-result02 = str(html('<{Heading} header="Component"><//>', config=CONFIG))
+result02 = html('<{Heading} header="Component"><//>', config=CONFIG)
