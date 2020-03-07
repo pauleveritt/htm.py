@@ -44,6 +44,34 @@ required.
 ('header', {}, ['Result', ': Hello ', 'Component'])
 
 
-Stateful Factory
-================
+Stateful Tag Factory
+====================
+
+We don't particularly want global state available in a component.
+Instead, we want application state:
+
+- Stuff computed at startup (e.g. reading a config file)
+
+- A configured callable which might get stuff from a database
+
+- Values that appear during the rendering of a string (and then the renderings of components and subcomponents further down)
+
+We want a *stateful* factory.
+At the moment, our custom ``htm`` function just hardcodes a ``tag_factory`` callable.
+Instead, we want our ``htm`` function to be *passed* a custom, stateful callable that can reach other parts of the system.
+
+This is kind of tricky to arrange.
+
+First, we'll pass this callable instance into the rendering, similar to above.
+
+.. literalinclude:: f03.py
+
+.. invisible-code-block: python
+
+  from f03 import result03
+
+>>> result03
+('header', {}, ['Result', ': Hello ', 'Component'])
+
+This, though, is a drag: we have to pass the instance in every time we use it, but worse, our ``Heading`` component also had to pass it along when returning ``html()``.
 
