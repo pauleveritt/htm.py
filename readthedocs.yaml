@@ -3,10 +3,12 @@ version: 2
 sphinx:
   configuration: docs/conf.py
 
-# Optionally set the version of Python and requirements required to build your docs
+# We have to install hyperpython_requirements.txt first
+# due to https://github.com/ejplatform/hyperpython/issues/4
 python:
   version: 3.7
   install:
+    - requirements: hyperpython_requirements.txt
     - method: pip
       path: .
       extra_requirements:
