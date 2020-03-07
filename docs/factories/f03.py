@@ -2,8 +2,6 @@ from inspect import Parameter, signature
 
 from factories.custom_factory import html
 
-CONFIG = dict(heading_label='Result')
-
 
 class ComponentFactory:
     def __init__(self):
