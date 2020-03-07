@@ -44,8 +44,8 @@ required.
 ('header', {}, ['Result', ': Hello ', 'Component'])
 
 
-Stateful Tag Factory
-====================
+Custom Tag Factory
+==================
 
 We don't particularly want global state available in a component.
 Instead, we want application state:
@@ -75,3 +75,21 @@ First, we'll pass this callable instance into the rendering, similar to above.
 
 This, though, is a drag: we have to pass the instance in every time we use it, but worse, our ``Heading`` component also had to pass it along when returning ``html()``.
 
+The solution: a stateful decorator.
+
+Stateful Decorator
+==================
+
+We currently call an ``html()`` function, passing a template string with components, and getting a VDOM.
+This ``html()``  function, which we write, is wrapped by the ``@htm`` decorator, which does the magic of tagged strings, calling, caching, etc.
+
+What if ``@htm`` was actually a stateful decorator?
+
+.. literalinclude:: f04.py
+
+.. invisible-code-block: python
+
+  from f04 import result04
+
+>>> result04
+('header', {}, ['Result', ': Hello ', 'Component'])
