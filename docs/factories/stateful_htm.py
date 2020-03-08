@@ -248,14 +248,18 @@ def htm_eval(h, ops, values, index=0, **kwargs):
     return root
 
 
-def htm(func=None, *, cache_maxsize=128, tag_factory=None):
+def htm(func=None, *, cache_maxsize=128, component_factory=None):
     cached_parse = functools.lru_cache(maxsize=cache_maxsize)(htm_parse)
+
+    # We are passed a class for the component factory. Make
+    # an instance in here.
+    cf = component_factory()
 
     def _htm(h):
         @tag
         @functools.wraps(h)
         def __htm(strings, values, **kwargs):
-            kwargs['tag_factory'] = tag_factory
+            kwargs['component_factory'] = cf
             ops = cached_parse(strings)
             return htm_eval(h, ops, values, **kwargs)
 

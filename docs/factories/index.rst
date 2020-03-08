@@ -75,7 +75,7 @@ First, we'll pass this callable instance into the rendering, similar to above.
 
 This, though, is a drag: we have to pass the instance in every time we use it, but worse, our ``Heading`` component also had to pass it along when returning ``html()``.
 
-The solution: a stateful decorator.
+The solution: state in the ``@htm`` decorator.
 
 Stateful Decorator
 ==================
@@ -84,6 +84,8 @@ We currently call an ``html()`` function, passing a template string with compone
 This ``html()``  function, which we write, is wrapped by the ``@htm`` decorator, which does the magic of tagged strings, calling, caching, etc.
 
 What if ``@htm`` was actually a stateful decorator?
+Meaning, it kept an instance of a passed-in class, which was then used to construct components.
+In this case, components could ask for arguments and the data would come from the instance.
 
 .. literalinclude:: f04.py
 
@@ -93,3 +95,7 @@ What if ``@htm`` was actually a stateful decorator?
 
 >>> result04
 ('header', {}, ['Result', ': Hello ', 'Component'])
+
+This solution works well for templating in components, as these are constructed under our control.
+It doesn't work for the variables in the template string itself.
+Those values come from the stack, as picked apart in ``tagged``.

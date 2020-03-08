@@ -35,9 +35,9 @@ class ComponentFactory:
         return tag_callable(**args)
 
 
-@htm(tag_factory=ComponentFactory())
+@htm(component_factory=ComponentFactory)
 def html(tag, props, children, **kwargs):
-    tag_factory: ComponentFactory = kwargs['tag_factory']
+    component_factory: ComponentFactory = kwargs['component_factory']
     if callable(tag):
-        return tag_factory(tag, children=children, **props, **kwargs)
+        return component_factory(tag, children=children, **props, **kwargs)
     return tag, props, children

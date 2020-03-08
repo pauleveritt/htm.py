@@ -8,5 +8,3 @@ def Heading(factory: ComponentFactory, header='Default'):
 
 
 result04 = html('<{Heading} header="Component"><//>')
-if __name__ == '__main__':
-    print(result04)
