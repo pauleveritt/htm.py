@@ -266,5 +266,11 @@ def htm(func=None, *, cache_maxsize=128, component_factory=None):
         return __htm
 
     if func is not None:
+        # func is None when the decorator is "called", e.g.
+        # @htm(component_factory=ComponentFactory)
+        # Thus, we only get in here when it is:
+        # @htm
         return _htm(func)
+
+    # Again, when the decorator is "called", return _htm, don't invoke it
     return _htm
