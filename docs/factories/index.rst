@@ -99,3 +99,18 @@ In this case, components could ask for arguments and the data would come from th
 This solution works well for templating in components, as these are constructed under our control.
 It doesn't work for the variables in the template string itself.
 Those values come from the stack, as picked apart in ``tagged``.
+
+Scanning for Decorators
+=======================
+
+This solution has a drawback: once the factory is instantiated, it's there forever.
+While not module scope, it's something that is hard to clean out, for example in tests.
+
+.. literalinclude:: f05.py
+
+.. invisible-code-block: python
+
+  from f05 import result05
+
+>>> result05
+('header', {}, ['Result', ': Hello ', 'Component'])
