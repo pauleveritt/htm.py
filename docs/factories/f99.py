@@ -33,9 +33,7 @@ class ComponentFactory:
         return tag_callable(**args)
 
 
-def htm(func=None, *, cache_maxsize=128, component_factory=None):
-    cached_parse = functools.lru_cache(maxsize=cache_maxsize)(htm_parse)
-
+def htm(func=None, *, component_factory=None):
     # We are passed a class for the component factory. Make
     # an instance in here.
     cf = component_factory()
@@ -45,7 +43,7 @@ def htm(func=None, *, cache_maxsize=128, component_factory=None):
         @functools.wraps(h)
         def __htm(strings, values, **kwargs):
             kwargs['component_factory'] = cf
-            ops = cached_parse(strings)
+            ops = htm_parse(strings)
             return htm_eval(h, ops, values, **kwargs)
 
         return __htm
@@ -61,6 +59,15 @@ def htm(func=None, *, cache_maxsize=128, component_factory=None):
     return _htm
 
 
+def do_once(func):
+    @functools.wraps(func)
+    def wrapper_do_twice(*args, **kwargs):
+        return func(*args, **kwargs)
+
+    return wrapper_do_twice
+
+
+# @do_once
 @htm(component_factory=ComponentFactory)
 def html(tag, props, children, **kwargs):
     component_factory: ComponentFactory = kwargs['component_factory']
@@ -77,6 +84,5 @@ def Heading(factory: ComponentFactory, header='Default'):
 
 if __name__ == '__main__':
     result = html('<{Heading} header="Component"><//>')
-    print(result)
     expected = ('header', {}, ['Result', ': Hello ', 'Component'])
     assert expected == result
